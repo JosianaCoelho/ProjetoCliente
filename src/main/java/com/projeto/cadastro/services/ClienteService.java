@@ -12,6 +12,7 @@ import com.projeto.cadastro.entities.Cliente;
 import com.projeto.cadastro.entities.dtos.ClienteDTO;
 import com.projeto.cadastro.repositories.ClienteRepository;
 
+import javassist.tools.rmi.ObjectNotFoundException;
 
 @Service
 public class ClienteService {
@@ -31,9 +32,9 @@ public class ClienteService {
 		return clienteRepository.findAll();
 	}
 	
-	public Cliente findById(Integer id) throws Exception {
+	public Cliente findById(Integer id) throws ObjectNotFoundException  {
 		Optional<Cliente> cliente = clienteRepository.findById(id);
-		return cliente.orElseThrow(()-> new Exception("não encontrado o Id: " + id));
+		return cliente.orElseThrow(()-> new ObjectNotFoundException("não encontrado o Id: " + id));
 	}
 	
 	public Cliente update(Integer id, @Valid ClienteDTO clienteDTO) throws Exception {
@@ -50,17 +51,17 @@ public class ClienteService {
 		clienteRepository.deleteById(id);
 	}
 
-	public void validaEmail(ClienteDTO clienteDTO) throws Exception {
+	public void validaEmail(ClienteDTO clienteDTO) throws IllegalArgumentException {
 		Optional<Cliente> cliente = clienteRepository.findByEmail(clienteDTO.getEmail());
 		if(cliente.isPresent() && cliente.get().getId() != clienteDTO.getId() ) {
-			throw new Exception("Email já cadastrado!");
+			throw new IllegalArgumentException("Email já cadastrado!");
 		}
 	}
 	
-	public void validaCpf(ClienteDTO clienteDTO) throws Exception {
+	public void validaCpf(ClienteDTO clienteDTO) throws IllegalArgumentException {
 		Optional<Cliente> cliente = clienteRepository.findByCpf(clienteDTO.getCpf());
 		if(cliente.isPresent() && cliente.get().getId() != clienteDTO.getId() ) {
-			throw new Exception("CPF já cadastrado!");
+			throw new IllegalArgumentException("CPF já cadastrado!");
 		}
 	}
 	

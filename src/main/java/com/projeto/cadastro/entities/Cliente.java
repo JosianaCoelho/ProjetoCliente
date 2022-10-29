@@ -2,6 +2,8 @@ package com.projeto.cadastro.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -11,8 +13,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.projeto.cadastro.entities.dtos.ClienteDTO;
 import com.projeto.cadastro.entities.enuns.Genero;
 
@@ -31,10 +35,6 @@ public class Cliente implements Serializable {
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataCriacao = LocalDate.now();
 	
-	public Cliente(Integer id, String nome, Genero sexo, String email, String cpf, LocalDate dataCriacao) {
-		
-	}
-
 	public Cliente() {
 	}
 

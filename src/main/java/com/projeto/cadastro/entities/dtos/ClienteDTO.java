@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +23,6 @@ public class ClienteDTO implements Serializable {
 	@NotNull(message = "Obrigatório")
 	private String nome;
 	
-	@Enumerated(EnumType.STRING)
 	private Genero sexo;
 	
 	@Column(unique = true)
@@ -96,5 +93,5 @@ public class ClienteDTO implements Serializable {
 	public void setDataCriacao(LocalDate dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
-
+	
 }
