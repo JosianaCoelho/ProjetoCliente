@@ -5,7 +5,7 @@ import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.projeto.cadastro.domain.Cliente;
+import com.projeto.cadastro.entities.Cliente;
 import com.projeto.cadastro.repositories.ClienteRepository;
 
 @Service
@@ -16,7 +16,8 @@ public class DBService {
 
 	public void instanciaDB() {
 
-		Cliente cliente = new Cliente(null, "Adriana", "33625585855", "adriana@gmail.com", null);
+		Cliente cliente = new Cliente();
 		clienteRepository.saveAll(Arrays.asList(cliente));
+		
 	}
 }
